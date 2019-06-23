@@ -57,7 +57,12 @@ const Player = function Player() {
     this.y = 404;
 };
 
-Player.prototype.update = function() {};
+Player.prototype.update = function() {
+    if(this.y < 44) {
+        console.log('gameWon');
+        gameWon();
+    }
+};
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -109,6 +114,11 @@ let gameOver = function() {
     player.y = 404;
 };
 
+let gameWon = function () {
+    player.x = 200;
+    player.y = 404;
+}
+
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener("keyup", function(e) {
@@ -122,8 +132,8 @@ document.addEventListener("keyup", function(e) {
     player.handleInput(allowedKeys[e.keyCode]);
 });
 
-let reset2 = document.getElementById("reset");
-reset2.addEventListener("click", function() {
+let reset = document.getElementById("reset");
+reset.addEventListener("click", function() {
     console.log("click");
     player.x = 200;
     player.y = 404;

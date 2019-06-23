@@ -10,7 +10,6 @@ const line = function random() {
     }
 };
 
-
 // Enemies our player must avoid
 const Enemy = function Enemy(x, speed) {
     // Variables applied to each of our instances go here,
@@ -36,6 +35,8 @@ Enemy.prototype.update = function(dt) {
         this.y = line();
         this.speed = Math.ceil(Math.random() * 5) * 100;
     }
+
+    // collision
     if (player.x - this.x < 10 && this.y === player.y) {
         console.log("You lose");
         gameOver();
@@ -66,15 +67,27 @@ Player.prototype.handleInput = function(direction) {
     switch (direction) {
         case "left":
             this.x -= 100;
+            if (this.x < 0) {
+                this.x = 0;
+            }
             break;
         case "right":
             this.x += 100;
+            if (this.x > 400) {
+                this.x = 400;
+            }
             break;
         case "up":
             this.y -= 90;
+            if (this.y < -46) {
+                this.y = -46;
+            }
             break;
         case "down":
             this.y += 90;
+            if (this.y > 404) {
+                this.y = 404;
+            }
             break;
     }
 };
@@ -90,11 +103,11 @@ for (let i = 0; i < 3; i++) {
 }
 let player = new Player();
 
-let gameOver = function () {
+let gameOver = function() {
     console.log("Game Over");
     player.x = 200;
     player.y = 404;
-}
+};
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
@@ -109,7 +122,7 @@ document.addEventListener("keyup", function(e) {
     player.handleInput(allowedKeys[e.keyCode]);
 });
 
-let reset2 = document.getElementById('reset');
+let reset2 = document.getElementById("reset");
 reset2.addEventListener("click", function() {
     console.log("click");
     player.x = 200;

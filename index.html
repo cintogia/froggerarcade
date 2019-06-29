@@ -4,9 +4,28 @@
     <meta charset="UTF-8">
     <title>Effective JavaScript: Frogger</title>
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
 </head>
 <body>
+	<div class="content">
+	<div class="button">
 	<button id="reset">RESET</button>
+	</div>
+	</div>
+	<div id="gameWon" class="is-hidden modal-overlay">
+    <div class="modal">
+      <span class="button-close">×</span>
+<h1>Yay! You've won!</h1>
+<button id="reset">RESET</button>
+    </div>
+  </div>
+  <div id="gameOver" class="is-hidden modal-overlay">
+    <div class="modal">
+      <span class="button-close">×</span>
+      <h1>Game Over</h1>
+      <button id="reset">RESET</button>
+    </div>
+  </div>
     <script src="js/resources.js"></script>
     <script src="js/app.js"></script>
     <script src="js/engine.js"></script>

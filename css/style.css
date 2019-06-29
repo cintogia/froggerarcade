@@ -1,3 +1,81 @@
 body {
     text-align: center;
+    font-family: 'Raleway', sans-serif;
+}
+
+button {
+	font-size: 32px;
+	font-family: 'Raleway', sans-serif;
+	color: #3c3c3ccf;
+	    background-image: url(../images/plain-block.png);
+    background-size: cover;
+    height: 129px;
+    width: 108px;
+    background-position: bottom;
+    background-color: transparent;
+    padding: 0;
+    margin-bottom: 45px;
+    border: 0;
+    cursor: pointer;
+}
+
+button:hover {
+box-shadow: inset 1px -20px 20px 0px #ffffff3d;
+}
+
+button:active {
+	color: #ababab;
+	box-shadow: inset 0px -20px 20px 0px #ffffff3d;
+}
+
+button:focus {
+	outline: none;
+}
+
+.content {
+	display: flex;
+	position: relative;
+	align-items: flex-end;
+	justify-content: center;
+}
+
+.button {
+	position: absolute;
+	margin: 110px 0 0 101px;
+}
+
+.is-hidden {
+  display: none;
+}
+
+.button-close {
+  display: inline-block;
+  font-size: 36px;
+  font-weight: 900;
+float: right;
+  position: relative;
+  cursor: pointer;
+}
+
+.modal-overlay {
+  position: fixed;
+      padding-top: 100px;
+    left: 0;
+    top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal {
+  padding: 20px 30px;
+  border-radius: 4px;
+  width: 25%;
+  position: relative;
+  min-height: 100px;
+  margin: 5% auto 0;
+  background: #c4e4b3;
+  z-index: 1;
 }

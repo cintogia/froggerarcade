@@ -52,6 +52,7 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 const Player = function Player() {
+    this.name = "LITTLE BOY";
     this.sprite = "images/char-boy.png";
     this.x = 200;
     this.y = 404;
@@ -65,6 +66,7 @@ Player.prototype.update = function() {
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    ctx.fillText(`${this.name}`, 330, 40);
 };
 
 Player.prototype.handleInput = function(direction) {
@@ -111,41 +113,54 @@ Selector.prototype.update = function() {
     if (player.x === 400 && player.y === 404) {
         let boy = "images/char-boy.png";
         if (player.sprite === boy) {
+            player.name = "CAT GIRL";
             player.sprite = "images/char-cat-girl.png";
             player.x = 300;
         } else {
+            player.name = "LITTLE BOY";
             player.sprite = "images/char-boy.png";
             player.x = 300;
         }
     }
 };
 
-// coins
+// Coins
 
 const Coins = function Coins() {
+    // add counter
+    this.count = 0;
     // bring in an unordered list of positions
-    let position_x = [2, 0, 4, 1, 3];
-    // make sure 6th(goal) line cannot appear
-    let position_y = [3, 1, 2, 0];
-    // get a random index for the positions
-    let index_x = Math.floor(Math.random() * 5);
-    let index_y = Math.floor(Math.random() * 4);
-    this.sprite = "images/Star.png";
+    const position_x = [2, 0, 4, 1, 3];
+    // make sure 6th(goal) line cannot be used
+    const position_y = [3, 1, 2, 0];
+    // list of coins
+    const img = ["images/Star.png", "images/Gem Green.png"];
+    const value = [10, 25];
     // randomize positions
     this.move = function() {
+        // get a random index for the positions
+        let index_x = Math.floor(Math.random() * 5);
+        let index_y = Math.floor(Math.random() * 4);
+        // pick random coin
+        let sprite_index = Math.floor(Math.random() * 2);
         this.x = position_x[index_x] * 100; // use full width (5 columns) of the canvas
         this.y = 314 - position_y[index_y] * 90; // start at 2nd line of the canvas
+        this.sprite = img[sprite_index];
+        this.value = value[sprite_index];
     };
     this.move();
 };
 
 Coins.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    ctx.font = "30px Raleway";
+    ctx.fillText(`${this.count} COINS`, 0, 40);
 };
 
 Coins.prototype.update = function() {
     if (player.x === this.x && this.y === player.y) {
         console.log("You earned 10 coins");
+        this.count += this.value;
         coins.move();
     }
 };

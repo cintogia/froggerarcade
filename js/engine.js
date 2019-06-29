@@ -92,7 +92,7 @@ var Engine = (function(global) {
      */
     function updateEntities(dt) {
         allEnemies.forEach(function(enemy) {
-            //enemy.update(dt);
+            enemy.update(dt);
         });
         coins.update();
         player.update();
@@ -158,7 +158,7 @@ var Engine = (function(global) {
          * the render function you have defined.
          */
         allEnemies.forEach(function(enemy) {
-            //enemy.render();
+            enemy.render();
         });
         coins.render();
         player.render();

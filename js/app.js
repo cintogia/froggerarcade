@@ -1,14 +1,11 @@
-// randomize enemyLine
-const line = function random() {
-    let random = Math.floor(Math.random() * 3);
-    if (random === 0) {
-        return 44;
-    } else if (random === 1) {
-        return 134;
-    } else {
-        return 224;
-    }
-};
+/*
+ *
+ * Title: Frogger Arcade Game
+ * Version: 1.0
+ * Author: Pietro Tallarico
+ * Github: https://github.com/cintogia/frontend-nanodegree-arcade-game
+ *
+ */
 
 // Enemies our player must avoid
 const Enemy = function Enemy(x, speed) {
@@ -19,6 +16,7 @@ const Enemy = function Enemy(x, speed) {
     // a helper we've provided to easily load images
     this.sprite = "images/enemy-bug.png";
     this.x = x;
+    // define on which line to start
     this.y = line();
     this.speed = speed * Math.ceil(Math.random() * 5);
 };
@@ -37,8 +35,7 @@ Enemy.prototype.update = function(dt) {
     }
 
     // collision
-    if (player.x - this.x < 10 && this.y === player.y) {
-        console.log("You lose");
+    if (player.x - this.x < 15 && player.x - this.x > 0 && this.y === player.y) {
         gameOver();
     }
 };
@@ -48,17 +45,31 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+// randomize enemyLine
+const line = function random() {
+    let random = Math.floor(Math.random() * 3);
+    if (random === 0) {
+        return 44;
+    } else if (random === 1) {
+        return 134;
+    } else {
+        return 224;
+    }
+};
+
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
 const Player = function Player() {
     this.blockInput = false;
+    // set default player
     this.name = "LITTLE BOY";
     this.sprite = "images/char-boy.png";
     this.x = 200;
     this.y = 404;
 };
 
+// Win the game when player reaches last line
 Player.prototype.update = function() {
     if (this.y < 44) {
         gameWon();
@@ -67,37 +78,40 @@ Player.prototype.update = function() {
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    // define font family once
+    ctx.font = "30px Raleway";
+    // display current player name
     ctx.fillText(`${this.name}`, 330, 40);
 };
 
 Player.prototype.handleInput = function(direction) {
-    if(player.blockInput === false) {
-    switch (direction) {
-        case "left":
-            this.x -= 100;
-            if (this.x < 0) {
-                this.x = 0;
-            }
-            break;
-        case "right":
-            this.x += 100;
-            if (this.x > 400) {
-                this.x = 400;
-            }
-            break;
-        case "up":
-            this.y -= 90;
-            if (this.y < -46) {
-                this.y = -46;
-            }
-            break;
-        case "down":
-            this.y += 90;
-            if (this.y > 404) {
-                this.y = 404;
-            }
-            break;
-    }
+    if (player.blockInput === false) {
+        switch (direction) {
+            case "left":
+                this.x -= 100;
+                if (this.x < 0) {
+                    this.x = 0;
+                }
+                break;
+            case "right":
+                this.x += 100;
+                if (this.x > 400) {
+                    this.x = 400;
+                }
+                break;
+            case "up":
+                this.y -= 90;
+                if (this.y < -46) {
+                    this.y = -46;
+                }
+                break;
+            case "down":
+                this.y += 90;
+                if (this.y > 404) {
+                    this.y = 404;
+                }
+                break;
+        }
     }
 };
 
@@ -127,8 +141,7 @@ Selector.prototype.update = function() {
     }
 };
 
-// Coins
-
+// Create Coins
 const Coins = function Coins() {
     // add counter
     this.count = 0;
@@ -156,14 +169,15 @@ const Coins = function Coins() {
 
 Coins.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    ctx.font = "30px Raleway";
+    //display current coins value
     ctx.fillText(`${this.count} COINS`, 0, 40);
 };
 
+// count and collect coins
 Coins.prototype.update = function() {
     if (player.x === this.x && this.y === player.y) {
-        console.log("You earned 10 coins");
         this.count += this.value;
+        console.log(`You earned ${this.value} coins`);
         coins.move();
     }
 };
@@ -184,24 +198,25 @@ let player = new Player();
 
 let selector = new Selector();
 
+// end game functions
 let gameOver = function() {
-    console.log("Game Over");
-    const modalOver = new Modal(document.querySelector("#gameOver"));
-    window.openModal = modalOver.open.bind(modalOver);
-    openModal();
+    // create modal content
+    button.innerText = "TRY AGAIN";
+    document.querySelector(".modal>h1").innerText = "GAME OVER";
+    // disable player moving
     player.blockInput = true;
-    player.x = 200;
-    player.y = 404;
+    // show modal
+    modal.style.display = "block";
 };
 
 let gameWon = function() {
-    console.log("Game Won");
-    const modalWon = new Modal(document.querySelector("#gameWon"));
-    window.openModal = modalWon.open.bind(modalWon);
-    openModal();
+    // create modal content
+    button.innerText = "NEW GAME";
+    document.querySelector(".modal>h1").innerText = "YAY! GAME WON!";
+    // disable player moving
     player.blockInput = true;
-    player.x = 200;
-    player.y = 404;
+    // show modal
+    modal.style.display = "block";
 };
 
 // This listens for key presses and sends the keys to your
@@ -217,9 +232,8 @@ document.addEventListener("keyup", function(e) {
     player.handleInput(allowedKeys[e.keyCode]);
 });
 
-// reset Button
-
-let reset = document.getElementById("reset");
+// New Game Buttons
+const reset = document.getElementById("reset");
 reset.addEventListener("click", function() {
     coins.count = 0;
     coins.move();
@@ -227,24 +241,37 @@ reset.addEventListener("click", function() {
     player.y = 404;
 });
 
-// https://lowrey.me/modals-in-pure-es6-javascript/
-class Modal {
-    constructor(overlay) {
-        this.overlay = overlay;
-        const closeButton = overlay.querySelector(".button-close");
-        closeButton.addEventListener("click", this.close.bind(this));
-        overlay.addEventListener("click", e => {
-            if (e.srcElement.id === this.overlay.id) {
-                this.close();
-            }
-        });
-    }
-    open() {
-        this.overlay.classList.remove("is-hidden");
-    }
+const button = document.querySelector("#modalButton");
+button.addEventListener("click", function() {
+    coins.count = 0;
+    coins.move();
+    player.x = 200;
+    player.y = 404;
+    closeModal();
+});
 
-    close() {
-        this.overlay.classList.add("is-hidden");
-        player.blockInput = false;
-    }
+
+// Modal
+const modal = document.querySelector(".modal-overlay");
+const span = document.querySelector(".button-close");
+
+/* TODO: needs debugging
+ *
+span.onclick = function() {
+  closeModal();
 }
+window.onclick = function(event) {
+  if (event.target === modal) {
+    closeModal();
+  }
+}
+ *
+ */
+
+// Close Modal function
+function closeModal() {
+    modal.style.display = "none";
+    player.blockInput = false;
+}
+
+

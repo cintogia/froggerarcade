@@ -58,8 +58,8 @@ const Player = function Player() {
 };
 
 Player.prototype.update = function() {
-    if(this.y < 44) {
-        console.log('gameWon');
+    if (this.y < 44) {
+        console.log("gameWon");
         gameWon();
     }
 };
@@ -97,6 +97,31 @@ Player.prototype.handleInput = function(direction) {
     }
 };
 
+// Player Switch
+const Selector = function Selector() {
+    this.sprite = "images/Selector.png";
+    this.x = 404;
+    this.y = 375;
+};
+
+Selector.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+Selector.prototype.update = function() {
+    if (player.x === 400 && player.y === 404) {
+        console.log("switch");
+        let boy = "images/char-boy.png";
+        if (player.sprite === boy) {
+            player.sprite = "images/char-cat-girl.png";
+            player.x = 300;
+        } else {
+            player.sprite = "images/char-boy.png";
+            player.x = 300;
+        }
+    }
+};
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
@@ -108,23 +133,25 @@ for (let i = 0; i < 3; i++) {
 }
 let player = new Player();
 
+let selector = new Selector();
+
 let gameOver = function() {
     console.log("Game Over");
-const modalOver = new Modal(document.querySelector('#gameOver'));
-window.openModal = modalOver.open.bind(modalOver);
-openModal();
+    const modalOver = new Modal(document.querySelector("#gameOver"));
+    window.openModal = modalOver.open.bind(modalOver);
+    openModal();
     player.x = 200;
     player.y = 404;
 };
 
-let gameWon = function () {
-console.log("Game Won");
-    const modalWon = new Modal(document.querySelector('#gameWon'));
-window.openModal = modalWon.open.bind(modalWon);
-openModal();
+let gameWon = function() {
+    console.log("Game Won");
+    const modalWon = new Modal(document.querySelector("#gameWon"));
+    window.openModal = modalWon.open.bind(modalWon);
+    openModal();
     player.x = 200;
     player.y = 404;
-}
+};
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
@@ -147,22 +174,22 @@ reset.addEventListener("click", function() {
 });
 
 // https://lowrey.me/modals-in-pure-es6-javascript/
- class Modal {
-  constructor(overlay) {
-    this.overlay = overlay;
-    const closeButton = overlay.querySelector('.button-close')
-    closeButton.addEventListener('click', this.close.bind(this));
-    overlay.addEventListener('click', e => {
-      if (e.srcElement.id === this.overlay.id) {
-        this.close();
-      }
-    });
-  }
-  open() {
-    this.overlay.classList.remove('is-hidden');
-  }
+class Modal {
+    constructor(overlay) {
+        this.overlay = overlay;
+        const closeButton = overlay.querySelector(".button-close");
+        closeButton.addEventListener("click", this.close.bind(this));
+        overlay.addEventListener("click", e => {
+            if (e.srcElement.id === this.overlay.id) {
+                this.close();
+            }
+        });
+    }
+    open() {
+        this.overlay.classList.remove("is-hidden");
+    }
 
-  close() {
-    this.overlay.classList.add('is-hidden');
-  }
+    close() {
+        this.overlay.classList.add("is-hidden");
+    }
 }

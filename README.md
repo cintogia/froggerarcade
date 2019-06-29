@@ -16,13 +16,9 @@ The game is inspired by 1981 [Frogger Arcade Game](https://en.wikipedia.org/wiki
 #### How it works
 
 You start with an avatar. At the first "line" of the canvas.
-
 If you want to switch you avatar just move to the Selector on the bottom right corner next to where your avatar starts.
-
 The avatar switch won't reset the game.
-
 Goal: Cross the street to reach the river. Once you've reached the river you win.
-
 Try to collect as many coins as possible.
 
 #### Main features are:

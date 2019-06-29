@@ -13,6 +13,18 @@
 This game is a quick and simple arcade game besed on **HTML**, **CSS** and **Javascript**.
 The game is inspired by 1981 [Frogger Arcade Game](https://en.wikipedia.org/wiki/Frogger).
 
+#### How it works
+
+You start with an avatar. At the first "line" of the canvas.
+
+If you want to switch you avatar just move to the Selector on the bottom right corner next to where your avatar starts.
+
+The avatar switch won't reset the game.
+
+Goal: Cross the street to reach the river. Once you've reached the river you win.
+
+Try to collect as many coins as possible.
+
 #### Main features are:
 
  * Coins counter: collect coins
@@ -37,11 +49,17 @@ The game is inspired by 1981 [Frogger Arcade Game](https://en.wikipedia.org/wiki
 ## Getting started
 
 Make sure to insert the scripts right before ```<body>``` ends.
+
 The ```js/engine.js``` needs a ```<div class="content">``` within the ```<body>``` by default.
+
 If you want to change that you can do so by changing it in the ```js/engine.js``` file on line 25 ```content = document.querySelector(".content")```.
+
 Additional images (e.g. avatars or coins) must be added to the ressource array in the ```js/engine.js``` file on line 180 ```Resources.load([])```.
+
 In order to render new objects create them in the ```js/app.js``` file, create a render method and add them to the ```renderEntities()``` function in the ```js/eninge.js``` file.
+
 Also, if you need the objects to update/interact within the game you need to create a update method and add them to the ```updateEntities()``` function in the ```js/eninge.js``` file.
+
 
 ```
 <!-- CSS -->

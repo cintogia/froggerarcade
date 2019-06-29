@@ -52,6 +52,7 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 const Player = function Player() {
+    this.blockInput = false;
     this.name = "LITTLE BOY";
     this.sprite = "images/char-boy.png";
     this.x = 200;
@@ -70,6 +71,7 @@ Player.prototype.render = function() {
 };
 
 Player.prototype.handleInput = function(direction) {
+    if(player.blockInput === false) {
     switch (direction) {
         case "left":
             this.x -= 100;
@@ -95,6 +97,7 @@ Player.prototype.handleInput = function(direction) {
                 this.y = 404;
             }
             break;
+    }
     }
 };
 
@@ -186,6 +189,7 @@ let gameOver = function() {
     const modalOver = new Modal(document.querySelector("#gameOver"));
     window.openModal = modalOver.open.bind(modalOver);
     openModal();
+    player.blockInput = true;
     player.x = 200;
     player.y = 404;
 };
@@ -195,6 +199,7 @@ let gameWon = function() {
     const modalWon = new Modal(document.querySelector("#gameWon"));
     window.openModal = modalWon.open.bind(modalWon);
     openModal();
+    player.blockInput = true;
     player.x = 200;
     player.y = 404;
 };
@@ -212,9 +217,12 @@ document.addEventListener("keyup", function(e) {
     player.handleInput(allowedKeys[e.keyCode]);
 });
 
+// reset Button
+
 let reset = document.getElementById("reset");
 reset.addEventListener("click", function() {
-    console.log("click");
+    coins.count = 0;
+    coins.move();
     player.x = 200;
     player.y = 404;
 });
@@ -237,5 +245,6 @@ class Modal {
 
     close() {
         this.overlay.classList.add("is-hidden");
+        player.blockInput = false;
     }
 }

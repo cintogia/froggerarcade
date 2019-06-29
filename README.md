@@ -27,8 +27,8 @@ The game is inspired by 1981 [Frogger Arcade Game](https://en.wikipedia.org/wiki
 
 ### Avatars
 
-![LITTLE BOY](https://github.com/cintogia/frontend-nanodegree-arcade-game/tree/master/images/char-boy.png)
-![CAT GIRL](https://github.com/cintogia/frontend-nanodegree-arcade-game/tree/master/images/char-cat-girl.png)
+![LITTLE BOY](https://raw.githubusercontent.com/cintogia/frontend-nanodegree-arcade-game/master/images/char-boy.png)
+![CAT GIRL](https://raw.githubusercontent.com/cintogia/frontend-nanodegree-arcade-game/master/images/char-cat-girl.png)
 
 ###### License
 

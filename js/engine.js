@@ -92,8 +92,9 @@ var Engine = (function(global) {
      */
     function updateEntities(dt) {
         allEnemies.forEach(function(enemy) {
-            enemy.update(dt);
+            //enemy.update(dt);
         });
+        coins.update();
         player.update();
         selector.update();
     }
@@ -152,12 +153,12 @@ var Engine = (function(global) {
          * the render function you have defined.
          */
         allEnemies.forEach(function(enemy) {
-            enemy.render();
+            //enemy.render();
         });
-
+        coins.render();
         player.render();
         selector.render();
-    }
+        }
 
     /* This function does nothing but it could have been a good place to
      * handle game reset states - maybe a new game menu or a game over screen
@@ -178,6 +179,7 @@ var Engine = (function(global) {
         'images/enemy-bug.png',
         'images/char-boy.png',
         'images/Selector.png',
+        "images/Star.png",
         "images/char-cat-girl.png"
     ]);
     Resources.onReady(init);

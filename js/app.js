@@ -59,7 +59,6 @@ const Player = function Player() {
 
 Player.prototype.update = function() {
     if (this.y < 44) {
-        console.log("gameWon");
         gameWon();
     }
 };
@@ -110,7 +109,6 @@ Selector.prototype.render = function() {
 
 Selector.prototype.update = function() {
     if (player.x === 400 && player.y === 404) {
-        console.log("switch");
         let boy = "images/char-boy.png";
         if (player.sprite === boy) {
             player.sprite = "images/char-cat-girl.png";
@@ -119,6 +117,36 @@ Selector.prototype.update = function() {
             player.sprite = "images/char-boy.png";
             player.x = 300;
         }
+    }
+};
+
+// coins
+
+const Coins = function Coins() {
+    // bring in an unordered list of positions
+    let position_x = [2, 0, 4, 1, 3];
+    // make sure 6th(goal) line cannot appear
+    let position_y = [3, 1, 2, 0];
+    // get a random index for the positions
+    let index_x = Math.floor(Math.random() * 5);
+    let index_y = Math.floor(Math.random() * 4);
+    this.sprite = "images/Star.png";
+    // randomize positions
+    this.move = function() {
+        this.x = position_x[index_x] * 100; // use full width (5 columns) of the canvas
+        this.y = 314 - position_y[index_y] * 90; // start at 2nd line of the canvas
+    };
+    this.move();
+};
+
+Coins.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+Coins.prototype.update = function() {
+    if (player.x === this.x && this.y === player.y) {
+        console.log("You earned 10 coins");
+        coins.move();
     }
 };
 
@@ -131,6 +159,9 @@ for (let i = 0; i < 3; i++) {
     let enemy = new Enemy(-100, 100);
     allEnemies.push(enemy);
 }
+
+let coins = new Coins();
+
 let player = new Player();
 
 let selector = new Selector();

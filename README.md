@@ -1,20 +1,63 @@
-# Classic Arcade Game Clone Project
+# Frogger Arcade Game
+###### Planet Cute art by Daniel Cook [Lostgarden.com](http://Lostgarden.com)
 
 ## Table of Contents
 
-- [Instructions](#instructions)
-- [Contributing](#contributing)
+* [Description](#description)
+* [Getting started](#getting-started)
+* [Little Roadmap](#little-roadmap)
+* [Additional information](#additional-information)
 
-## Instructions
+## Description
 
-Use this [rubric](https://review.udacity.com/#!/rubrics/15/view) for self-checking your submission.
+This game is a quick and simple arcade game besed on **HTML**, **CSS** and **Javascript**.
+The game is inspired by 1981 [Frogger Arcade Game](https://en.wikipedia.org/wiki/Frogger).
 
-Make sure the functions you write are **object-oriented** - either class functions (like `Player` and `Enemy`) or class prototype functions such as `Enemy.prototype.checkCollisions`. Also make sure that the keyword `this` is used appropriately within your class and class prototype functions to refer to the object the function is called upon.
+#### Main features are:
 
-Your **README.md** file should be updated with instructions on both how to 1. Run and 2. Play your arcade game.
+ * Coins counter: collect coins
+ 	* Star = 10 coins
+ 	* Blue Diamond = 25 coins
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+ * Switch between player avatars
+ 	* LITTLE BOY
+ 	* CAT GIRL
 
-## Contributing
+ * Reset button
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+### Avatars
+
+![LITTLE BOY](https://github.com/cintogia/frontend-nanodegree-arcade-game/tree/master/images/char-boy.png)
+![CAT GIRL](https://github.com/cintogia/frontend-nanodegree-arcade-game/tree/master/images/char-cat-girl.png)
+
+###### License
+
+[2htdp/planetcute library](https://docs.racket-lang.org/teachpack/2htdpPlanet_Cute_Images.html)
+
+## Getting started
+
+Make sure to insert the scripts right before ```<body>``` ends.
+The ```js/engine.js``` needs a ```<div class="content">``` within the ```<body>``` by default.
+If you want to change that you can do so by changing it in the ```js/engine.js``` file on line 25 ```content = document.querySelector(".content")```.
+Additional images (e.g. avatars or coins) must be added to the ressource array in the ```js/engine.js``` file on line 180 ```Resources.load([])```.
+In order to render new objects create them in the ```js/app.js``` file, create a render method and add them to the ```renderEntities()``` function in the ```js/eninge.js``` file.
+Also, if you need the objects to update/interact within the game you need to create a update method and add them to the ```updateEntities()``` function in the ```js/eninge.js``` file.
+
+```
+<!-- CSS -->
+<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+<!-- script before body tag ends-->
+<script src="js/resources.js"></script>
+<script src="js/app.js"></script>
+<script src="js/engine.js"></script>
+```
+
+## Little Roadmap
+
+ * Make more Avatars available
+ * Get to the next level after winning
+
+## Additional information
+
+This project is part of my @udacity Front-End Web Developer Nanodegree.

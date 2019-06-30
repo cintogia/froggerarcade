@@ -13,6 +13,14 @@
 This game is a quick and simple arcade game besed on **HTML**, **CSS** and **Javascript**.
 The game is inspired by 1981 [Frogger Arcade Game](https://en.wikipedia.org/wiki/Frogger).
 
+#### Installation
+
+Download the `frontend-nanodegree-arcade-game-master.zip` to your computer and unzip it. Go to the unzipped folder and open the `index.html` file in your browser.
+
+You can also clone this repository using Git `$ git clone https://github.com/cintogia/frontend-nanodegree-arcade-game.git`. Go to the directory where you cloned the repository and open the `index.html` file in your browser.
+
+**Start Playing!** :video_game:
+
 #### How it works
 
 You start with an avatar. At the first "line" of the canvas.
